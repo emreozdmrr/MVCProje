@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbSuperMarketModelStoreContainer" CdmEntityContainer="DbSuperMarketEntities">
+    <EntitySetMapping Name="TBLKULLANICILAR">
+      <EntityTypeMapping TypeName="DbSuperMarketModel.TBLKULLANICILAR">
+        <MappingFragment StoreEntitySet="TBLKULLANICILAR">
+          <ScalarProperty Name="KULLANICIID" ColumnName="KULLANICIID" />
+          <ScalarProperty Name="KULLANICIAD" ColumnName="KULLANICIAD" />
+          <ScalarProperty Name="KULLANICISIFRE" ColumnName="KULLANICISIFRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLKATEGORİLER">
+      <EntityTypeMapping TypeName="DbSuperMarketModel.TBLKATEGORİLER">
+        <MappingFragment StoreEntitySet="TBLKATEGORİLER">
+          <ScalarProperty Name="KATEGORIRESIM" ColumnName="KATEGORIRESIM" />
+          <ScalarProperty Name="KATEGORIAD" ColumnName="KATEGORIAD" />
+          <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBLÜRÜNLER">
+      <EntityTypeMapping TypeName="DbSuperMarketModel.TBLÜRÜNLER">
+        <MappingFragment StoreEntitySet="TBLÜRÜNLER">
+          <ScalarProperty Name="URUNINDIRIMORANI" ColumnName="URUNINDIRIMORANI" />
+          <ScalarProperty Name="URUNRESIM" ColumnName="URUNRESIM" />
+          <ScalarProperty Name="URUNFIYAT" ColumnName="URUNFIYAT" />
+          <ScalarProperty Name="URUNBIRIM" ColumnName="URUNBIRIM" />
+          <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
+          <ScalarProperty Name="URUNAD" ColumnName="URUNAD" />
+          <ScalarProperty Name="URUNID" ColumnName="URUNID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

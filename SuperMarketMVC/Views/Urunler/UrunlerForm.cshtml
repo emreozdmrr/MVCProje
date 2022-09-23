@@ -1,0 +1,46 @@
+﻿@model SuperMarketMVC.Models.TBLÜRÜNLER
+
+@{
+    ViewBag.Title = "UrunlerForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Kaydet", "Urunler", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.URUNAD)
+        @Html.TextBoxFor(m => m.URUNAD, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.URUNAD)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.KATEGORIID)
+        @Html.DropDownListFor(m => m.KATEGORIID, new SelectList(ViewBag.kategoriler, "KATEGORIID", "KATEGORIAD"), "Kategori Seçiniz.", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.KATEGORIID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.URUNBIRIM)
+        @Html.TextBoxFor(m => m.URUNBIRIM, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.URUNBIRIM)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.URUNFIYAT)
+        @Html.TextBoxFor(m => m.URUNFIYAT, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.URUNFIYAT)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.URUNINDIRIMORANI)
+        @Html.TextBoxFor(m => m.URUNINDIRIMORANI, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.URUNINDIRIMORANI)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.URUNRESIM)
+    </div>
+    <div class="form-group">
+        <img src="@Model.URUNRESIM" class="img-thumbnail" width="100" />
+    </div>
+    <div class="form-group">
+        <input type="file" name="URUNRESIM" />
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    @Html.HiddenFor(m => m.URUNID)
+}

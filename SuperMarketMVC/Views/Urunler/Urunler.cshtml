@@ -1,0 +1,138 @@
+﻿@using SuperMarketMVC.Models
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLÜRÜNLER>
+
+@{
+    ViewBag.Title = "Urunler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.baslik</h2>
+<style>
+
+    body {
+        background-color: #d8d0d0;
+    }
+
+    table td {
+        font-size: small;
+        height: auto;
+        background-color: #ffffff;
+        width: auto;
+        border-radius: 10px 5px;
+    }
+
+    img {
+        width: 250px;
+        height: 250px;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+    }
+
+    h3 {
+        color: #000000;
+        text-align: center;
+    }
+
+    h4 {
+        color: #701515;
+        text-align: center;
+    }
+
+    h5 {
+        text-decoration: line-through;
+        text-align: center;
+    }
+    label{
+        margin-left:10px;
+        background-color:#efa8a8;
+        color:#000000;
+        font-size:30px;
+        
+    }
+</style>
+
+<body>
+    <table class="table table-bordered">
+        @for (int i = 0; i < Model.Count; i = i + 3)
+        {
+            <tr class="container">
+                <td class="card">
+                    <div class="product-image">
+                        <img src="@Model[i].URUNRESIM" />
+                    </div>
+                    <div class="product-info">
+                        <h3>@Model[i].URUNAD</h3>
+                        @if (Model[i].URUNINDIRIMORANI != null && Model[i].URUNINDIRIMORANI > 0)
+                        {
+                            double x = Convert.ToDouble(Model[i].URUNINDIRIMORANI) / (double)100;
+                            var indirimliFiyat = Convert.ToDouble(Model[i].URUNFIYAT) - (Convert.ToDouble(Model[i].URUNFIYAT) * x);
+                            <h5>₺@Model[i].URUNFIYAT  ( @Model[i].URUNBIRIM) </h5>
+                            <h4>₺@indirimliFiyat ( @Model[i].URUNBIRIM) <label>%@Model[i].URUNINDIRIMORANI</label> </h4>
+                        }
+                        else
+                        {
+                            <h4>₺@Model[i].URUNFIYAT  ( @Model[i].URUNBIRIM)</h4>
+                        }
+                    </div>
+                </td>
+                @if (Model.Count >= i + 2)
+                {
+                    <td class="card">
+                        <div class="product-image">
+                            <img src="@Model[i+1].URUNRESIM" />
+                        </div>
+                        <div class="product-info">
+                            <h3>@Model[i + 1].URUNAD</h3>
+                            @if (Model[i + 1].URUNINDIRIMORANI != null && Model[i + 1].URUNINDIRIMORANI > 0)
+                            {
+                                double x = Convert.ToDouble(Model[i + 1].URUNINDIRIMORANI) / (double)100;
+                                var indirimliFiyat = Convert.ToDouble(Model[i + 1].URUNFIYAT) - (Convert.ToDouble(Model[i + 1].URUNFIYAT) * x);
+                                <h5>₺@Model[i + 1].URUNFIYAT  ( @Model[i + 1].URUNBIRIM)</h5>
+                                <h4>₺@indirimliFiyat ( @Model[i + 1].URUNBIRIM) <label>%@Model[i+1].URUNINDIRIMORANI</label></h4>
+                            }
+                            else
+                            {
+                                <h4>₺@Model[i + 1].URUNFIYAT  ( @Model[i + 1].URUNBIRIM)</h4>
+                            }
+                        </div>
+                    </td>
+                } @if (Model.Count >= i + 3)
+                {
+                    <td class="card">
+                        <div class="product-image">
+                            <img src="@Model[i+2].URUNRESIM" />
+                        </div>
+                        <div class="product-info">
+                            <h3>@Model[i + 2].URUNAD</h3>
+                            @if (Model[i + 2].URUNINDIRIMORANI != null && Model[i + 2].URUNINDIRIMORANI > 0)
+                            {
+                                double x = Convert.ToDouble(Model[i + 2].URUNINDIRIMORANI) / (double)100;
+                                var indirimliFiyat = Convert.ToDouble(Model[i + 2].URUNFIYAT) - (Convert.ToDouble(Model[i + 2].URUNFIYAT) * x);
+                                <h5>₺@Model[i + 2].URUNFIYAT  ( @Model[i + 2].URUNBIRIM)</h5>
+                                <h4>₺@indirimliFiyat ( @Model[i + 2].URUNBIRIM)<label>%@Model[i+2].URUNINDIRIMORANI</label></h4>
+                            }
+                            else
+                            {
+                                <h4>₺@Model[i + 2].URUNFIYAT  ( @Model[i + 2].URUNBIRIM)</h4>
+                            }
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+    @if (ViewBag.baslik == "Tüm Ürünler")
+    {
+        @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("UrunleriListele", new { sayfa }))
+    }
+    else
+    {
+        @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("KategoriDetay", new { sayfa }))
+    }
+</body>
+
+
+

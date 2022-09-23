@@ -1,0 +1,48 @@
+﻿@using SuperMarketMVC.Models
+@model List<TBLÜRÜNLER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    td {
+        text-align:center;
+    }
+</style>
+
+<h1>Ürün Düzenleme</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ÜRÜN ID</th>
+            <th>ÜRÜN ADI</th>
+            <th>ÜRÜN KATEGORİ</th>
+            <th>ÜRÜN BİRİM</th>
+            <th>ÜRÜN FİYAT</th>
+            <th>İNDİRİM</th>
+            <th>ÜRÜN GÖRSEL</th>
+            <th>GÜNCELLE</th>
+            <th>SİL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var urun in Model)
+        {
+            <tr>
+                <td>@urun.URUNID</td>
+                <td>@urun.URUNAD</td>
+                <td>@urun.TBLKATEGORİLER.KATEGORIAD</td>
+                <td>@urun.URUNBIRIM</td>
+                <td>@urun.URUNFIYAT</td>
+                <td>%@urun.URUNINDIRIMORANI</td>
+                <td> <img src="@urun.URUNRESIM" class="img-thumbnail" width="100" /> </td>
+                <td><a href="/Urunler/Guncelle/@urun.URUNID" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/Urunler/Sil/@urun.URUNID" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Urunler/Ekle" class="btn btn-primary">Yeni Ürün Ekle</a>

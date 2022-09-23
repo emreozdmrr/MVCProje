@@ -1,0 +1,29 @@
+﻿@model SuperMarketMVC.Models.TBLKATEGORİLER
+
+@{
+    ViewBag.Title = "KategoriForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Yeni Kategori Ekleme Sayfası</h2>
+
+@using (@Html.BeginForm("Kaydet", "Kategori", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.KATEGORIAD)
+        @Html.TextBoxFor(m => m.KATEGORIAD, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.KATEGORIAD)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.KATEGORIRESIM)
+    </div>
+    <div class="form-group">
+        <img src="@Model.KATEGORIRESIM" class="img-thumbnail" width="100" />
+    </div>
+    <div class="form-group">
+        <input type="file" name="KATEGORIRESIM" />
+    </div>
+    @Html.HiddenFor(m => m.KATEGORIID)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}
+

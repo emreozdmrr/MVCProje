@@ -1,0 +1,42 @@
+﻿@using SuperMarketMVC.Models
+@model List<TBLKATEGORİLER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    td {
+        text-align: center;
+    }
+</style>
+
+<h1>Kategori Düzenleme</h1>
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>KATEGORİ ID</th>
+            <th>KATEGORİ ADI</th>
+            <th>KATEGORİ GÖRSEL</th>
+            <th>GÜNCELLE</th>
+            <th>SİL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kategori in Model)
+        {
+            <tr>
+                <td>@kategori.KATEGORIID</td>
+                <td>@kategori.KATEGORIAD</td>
+                <td> <img src="@kategori.KATEGORIRESIM" class="img-thumbnail" width="100" /> </td>
+                <td><a href="/Kategori/Guncelle/@kategori.KATEGORIID" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/Kategori/Sil/@kategori.KATEGORIID" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Kategori/Ekle/" class="btn btn-primary">Yeni Kategori Ekle</a>
+

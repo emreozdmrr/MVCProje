@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbSuperMarketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBLKULLANICILAR">
+    <Key>
+      <PropertyRef Name="KULLANICIID" />
+    </Key>
+    <Property Name="KULLANICIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KULLANICIAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KULLANICISIFRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="DbSuperMarketEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBLKULLANICILAR" EntityType="Self.TBLKULLANICILAR" />
+    <EntitySet Name="TBLKATEGORİLER" EntityType="DbSuperMarketModel.TBLKATEGORİLER" />
+    <EntitySet Name="TBLÜRÜNLER" EntityType="DbSuperMarketModel.TBLÜRÜNLER" />
+    <AssociationSet Name="FK_TBLÜRÜNLER_TBLKATEGORİLER" Association="DbSuperMarketModel.FK_TBLÜRÜNLER_TBLKATEGORİLER">
+      <End Role="TBLKATEGORİLER" EntitySet="TBLKATEGORİLER" />
+      <End Role="TBLÜRÜNLER" EntitySet="TBLÜRÜNLER" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBLKATEGORİLER">
+    <Key>
+      <PropertyRef Name="KATEGORIID" />
+    </Key>
+    <Property Name="KATEGORIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KATEGORIAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KATEGORIRESIM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBLÜRÜNLER" Relationship="DbSuperMarketModel.FK_TBLÜRÜNLER_TBLKATEGORİLER" FromRole="TBLKATEGORİLER" ToRole="TBLÜRÜNLER" />
+  </EntityType>
+  <EntityType Name="TBLÜRÜNLER">
+    <Key>
+      <PropertyRef Name="URUNID" />
+    </Key>
+    <Property Name="URUNID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="URUNAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KATEGORIID" Type="Int32" />
+    <Property Name="URUNBIRIM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="URUNFIYAT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="URUNRESIM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="URUNINDIRIMORANI" Type="Int32" />
+    <NavigationProperty Name="TBLKATEGORİLER" Relationship="DbSuperMarketModel.FK_TBLÜRÜNLER_TBLKATEGORİLER" FromRole="TBLÜRÜNLER" ToRole="TBLKATEGORİLER" />
+  </EntityType>
+  <Association Name="FK_TBLÜRÜNLER_TBLKATEGORİLER">
+    <End Type="DbSuperMarketModel.TBLKATEGORİLER" Role="TBLKATEGORİLER" Multiplicity="0..1" />
+    <End Type="DbSuperMarketModel.TBLÜRÜNLER" Role="TBLÜRÜNLER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLKATEGORİLER">
+        <PropertyRef Name="KATEGORIID" />
+      </Principal>
+      <Dependent Role="TBLÜRÜNLER">
+        <PropertyRef Name="KATEGORIID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
